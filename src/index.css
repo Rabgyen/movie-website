@@ -1,0 +1,82 @@
+@import "tailwindcss";
+
+
+body{
+  font-family: "Poppins",sans-serif;
+  background-color: #212121;
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar{
+  background-color: #212121;
+  border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb{
+  background-color: white;
+  border-radius: 20px;
+}
+
+
+.loader {
+  display: flex;
+  align-items: center;
+}
+
+.bar {
+  display: inline-block;
+  width: 3px;
+  height: 20px;
+  background-color: rgba(255, 255, 255, .5);
+  border-radius: 10px;
+  animation: scale-up4 1s linear infinite;
+}
+
+.bar:nth-child(2) {
+  height: 35px;
+  margin: 0 5px;
+  animation-delay: .25s;
+}
+
+.bar:nth-child(3) {
+  animation-delay: .5s;
+}
+
+@keyframes scale-up4 {
+  20% {
+    background-color: #ffff;
+    transform: scaleY(1.5);
+  }
+
+  40% {
+    transform: scaleY(1);
+  }
+}
+
+@media (max-width:640px) {
+  .small-screen{
+    height: 450px;
+    padding-bottom: 10px;
+  }
+  .small-description{
+    min-width: 200px;
+  }
+  .small-description h1{
+    font-size: 38px;
+    margin-top: 20px;
+  }
+  .small-description p{
+    font-size: 12px;
+  }
+}
+
+@media (max-width:975px) {
+  .about-movie{
+    gap:50px;
+  }
+  .small-description{
+    padding: 10px 0;
+  }
+}
