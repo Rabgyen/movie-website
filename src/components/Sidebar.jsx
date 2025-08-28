@@ -36,7 +36,8 @@ const Sidebar = () => {
           ) : null}
         </div>
         <div className="flex flex-col gap-2 font-medium">
-          <div className="flex items-center border-l-0 gap-2 py-3 px-5 cursor-pointer transition-all duration-75 ease-in hover:border-l-3 hover:border-[#60dbcb]">
+          <Link to={"/"}>
+            <div className="flex items-center border-l-0 gap-2 py-3 px-5 cursor-pointer transition-all duration-75 ease-in hover:border-l-3 hover:border-[#60dbcb]">
             <FontAwesomeIcon icon={faHome} />
             <h1 className={`
                 text-xs
@@ -47,9 +48,10 @@ const Sidebar = () => {
                     : "opacity-0 -translate-x-4"
                 }
             `} style={{ whiteSpace: "nowrap" }}>
-              <Link to={"/"}>Home</Link>
+              Home
             </h1>
           </div>
+          </Link>
           <div className="flex items-center border-l-0 gap-2 py-3 px-5 cursor-pointer transition-all duration-75 ease-in hover:border-l-3 hover:border-[#60dbcb]">
             <FontAwesomeIcon icon={faCompass} />
             <h1 className={`
@@ -62,9 +64,11 @@ const Sidebar = () => {
                 }
             `} style={{ whiteSpace: "nowrap" }}>Explore</h1>
           </div>
-          <div className="flex items-center border-l-0 gap-2 py-3 px-5 cursor-pointer transition-all duration-75 ease-in hover:border-l-3 hover:border-[#60dbcb]">
+          <Link to={"favorite"}>
+            <div className="flex items-center border-l-0 gap-2 py-3 px-5 cursor-pointer transition-all duration-75 ease-in hover:border-l-3 hover:border-[#60dbcb]">
             <FontAwesomeIcon icon={faHeart} />
-            <h1 className={`
+                <Link to={"favorite"}>
+                <h1 className={`
                 text-xs
                 transition-all duration-100 delay-75
                 ${
@@ -72,8 +76,9 @@ const Sidebar = () => {
                     ? "opacity-100 translate-x-0"
                     : "opacity-0 -translate-x-4"
                 }
-            `} tyle={{ whiteSpace: "nowrap" }}>Favorites</h1>
+            `} style={{ whiteSpace: "nowrap" }}>Favorites</h1></Link>
           </div>
+          </Link>
         </div>
       </div>
       <div>

@@ -43,7 +43,7 @@ const HomePage = () => {
       {searched && popularMovies.length > 0 && <MovieSlider movies={popularMovies} />}
       {searched ? <h1 className="my-8 text-2xl font-medium text-white">You might like</h1>: <h1 className="my-8 text-2xl font-medium text-white">Showing results for '{searchedMovie}'</h1>}
       <div>
-        <div className="flex flex-wrap justify-center gap-10">
+        <div className="flex flex-wrap justify-center gap-6">
           {movies.map((movie) => (
             <MovieCard key={movie.id} movie={movie} />
           ))}

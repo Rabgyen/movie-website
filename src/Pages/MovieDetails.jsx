@@ -13,16 +13,26 @@ import {
 import { movieDetails } from "../sources/tmdbApi";
 import { movieCast } from "../sources/tmdbApi";
 import { movieTrailer } from "../sources/tmdbApi";
+import { useFavoriteContext } from "../context/FavoriteContext";
 
 const MovieDetails = () => {
   const { id } = useParams();
   const [aboutMovie, setAboutMovie] = useState({});
   const [casts, setCasts] = useState([]);
   const [trailerUrl, setTrailerUrl] = useState(null);
-  const [favorite, setFavorite] = useState(false);
   const [watchLater, setWatchLater] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
   const [gotTrailer, setGotTrailer] = useState(false);
+
+  const { isFavoriteMovie, addToFavoites, removeFromFavorite} = useFavoriteContext();
+
+  const favorite = isFavoriteMovie(aboutMovie.id) 
+
+  const favoriteOnClick = (e) => {
+    e.preventDefault()
+    if(favorite) removeFromFavorite(aboutMovie.id)
+    else addToFavoites(aboutMovie)
+  }
 
   useEffect(() => {
     const getMovieDetails = async () => {
@@ -94,7 +104,7 @@ const MovieDetails = () => {
 
       <div className="absolute top-0 flex flex-wrap justify-center w-full h-full py-8 px-4 bg-black/20 about-movie">
         <div className="flex flex-col items-center h-full gap-4 px-8">
-          <div className="h-[500px] w-[330px] rounded-2xl overflow-hidden shadow-lg">
+          <div className="h-[495px] w-[330px] rounded-2xl overflow-hidden shadow-lg">
             <img
               src={
                 aboutMovie.poster_path
@@ -129,7 +139,7 @@ const MovieDetails = () => {
                 <FontAwesomeIcon
                   icon={faHeart}
                   className="cursor-pointer"
-                  onClick={isFavorite}
+                  onClick={favoriteOnClick}
                   style={{ color: favorite ? "red" : "white" }}
                 />
                 <h1 className="cursor-default">Favorite</h1>
