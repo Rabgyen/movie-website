@@ -14,6 +14,7 @@ import { movieDetails } from "../sources/tmdbApi";
 import { movieCast } from "../sources/tmdbApi";
 import { movieTrailer } from "../sources/tmdbApi";
 import { useFavoriteContext } from "../context/FavoriteContext";
+import { useSaveMovieContext } from "../context/SaveMovieContext";
 
 const MovieDetails = () => {
   const { id } = useParams();
@@ -25,13 +26,21 @@ const MovieDetails = () => {
   const [gotTrailer, setGotTrailer] = useState(false);
 
   const { isFavoriteMovie, addToFavoites, removeFromFavorite} = useFavoriteContext();
+  const { addToSave, removeFromSave, isSavedMovie } = useSaveMovieContext();
 
-  const favorite = isFavoriteMovie(aboutMovie.id) 
+  const favorite = isFavoriteMovie(aboutMovie.id) ;
+  const saved = isSavedMovie(aboutMovie.id);
 
-  const favoriteOnClick = (e) => {
-    e.preventDefault()
+  const favoriteOnClick = () => {
     if(favorite) removeFromFavorite(aboutMovie.id)
     else addToFavoites(aboutMovie)
+  }
+
+  console.log(saved)
+
+  const saveOnClick = () => {
+    if(saved) removeFromSave(aboutMovie.id)
+    else addToSave(aboutMovie)
   }
 
   useEffect(() => {
@@ -59,13 +68,6 @@ const MovieDetails = () => {
     getTrailer();
   }, [id]);
 
-  const isFavorite = () => {
-    setFavorite((prev) => !prev);
-  };
-
-  const isWatchLater = () => {
-    setWatchLater((prev) => !prev);
-  };
 
   const notificationAppear = () => {
     setShowNotification(true);
@@ -116,8 +118,8 @@ const MovieDetails = () => {
             />
           </div>
 
-          <div className="flex flex-col gap-8 ">
-            <div className="flex items-center w-full gap-2">
+          <div className="flex flex-col gap-8 w-[250px] ">
+            <div className="flex items-center justify-center w-full gap-2">
               {gotTrailer ? <a
                 href={trailerUrl}
                 target="_blank"
@@ -134,34 +136,19 @@ const MovieDetails = () => {
                 <h1>Trailer Not Available</h1>
                 </div>}
             </div>
-            <div className="flex w-full gap-8 ">
-              <div className="text-center transition-all ease-in-out">
+            <div className="flex w-full justify-center gap-8">
+              <div className="text-center">
                 <FontAwesomeIcon
                   icon={faHeart}
                   className="cursor-pointer"
                   onClick={favoriteOnClick}
                   style={{ color: favorite ? "red" : "white" }}
                 />
-                <h1 className="cursor-default">Favorite</h1>
+                <h1 className="cursor-default text-xs">Favorite</h1>
               </div>
-              <div className="text-center" onClick={isWatchLater}>
-                {watchLater ? (
-                  <div>
-                    <FontAwesomeIcon
-                      icon={faCheck}
-                      className="cursor-pointer"
-                    />{" "}
-                    <h1 className="max-w-[100px]">Added to watch list</h1>
-                  </div>
-                ) : (
-                  <div>
-                    <FontAwesomeIcon
-                      icon={faBookmark}
-                      className="cursor-pointer"
-                    />
-                    <h1>Watch later</h1>
-                  </div>
-                )}
+              <div className="text-center cursor-pointer">
+                <FontAwesomeIcon icon={faBookmark} onClick={saveOnClick} className={`${saved ? "text-[#60dbcb]" : "text-white"}`}/>
+                {saved ? <p className="text-xs">Add To WatchList</p> : <p className="text-xs">Added To WatchList</p>}
               </div>
             </div>
           </div>

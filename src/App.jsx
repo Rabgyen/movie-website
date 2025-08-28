@@ -5,6 +5,8 @@ import Sidebar from './components/Sidebar'
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom'
 import { FavoriteMovieProvider } from './context/FavoriteContext'
 import FavoritePage from './Pages/FavoritePage'
+import { SaveMovieContextProvider } from './context/SaveMovieContext'
+import SavedMovies from './Pages/SavedMovies'
 
 const Layout = () => (
   <div className='flex w-screen h-screen'>
@@ -25,11 +27,12 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <HomePage /> },
       { path: "movie/:id", element: <MovieDetails /> },
-      { path: "favorite", element: <FavoritePage/>}
+      { path: "favorite", element: <FavoritePage/>},
+      { path: "watchlist", element: <SavedMovies/>}
     ]
   }
 ]);
 
-const App = () => <FavoriteMovieProvider><RouterProvider router={router} /></FavoriteMovieProvider>
+const App = () => <SaveMovieContextProvider><FavoriteMovieProvider><RouterProvider router={router} /></FavoriteMovieProvider></SaveMovieContextProvider>
 
 export default App;

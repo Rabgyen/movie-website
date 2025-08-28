@@ -7,6 +7,7 @@ import { faCompass } from "@fortawesome/free-solid-svg-icons";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import { faGear } from "@fortawesome/free-solid-svg-icons";
+import { faListCheck } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 
 const Sidebar = () => {
@@ -52,8 +53,9 @@ const Sidebar = () => {
             </h1>
           </div>
           </Link>
-          <div className="flex items-center border-l-0 gap-2 py-3 px-5 cursor-pointer transition-all duration-75 ease-in hover:border-l-3 hover:border-[#60dbcb]">
-            <FontAwesomeIcon icon={faCompass} />
+          <Link to={"watchlist"}>
+            <div className="flex items-center border-l-0 gap-2 py-3 px-5 cursor-pointer transition-all duration-75 ease-in hover:border-l-3 hover:border-[#60dbcb]">
+            <FontAwesomeIcon icon={faListCheck} />
             <h1 className={`
                 text-xs
                 transition-all duration-100 delay-75
@@ -62,8 +64,9 @@ const Sidebar = () => {
                     ? "opacity-100 translate-x-0"
                     : "opacity-0 -translate-x-4"
                 }
-            `} style={{ whiteSpace: "nowrap" }}>Explore</h1>
+            `} style={{ whiteSpace: "nowrap" }}>Watch List</h1>
           </div>
+          </Link>
           <Link to={"favorite"}>
             <div className="flex items-center border-l-0 gap-2 py-3 px-5 cursor-pointer transition-all duration-75 ease-in hover:border-l-3 hover:border-[#60dbcb]">
             <FontAwesomeIcon icon={faHeart} />
