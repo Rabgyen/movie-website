@@ -1,4 +1,4 @@
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import demoImg from "../assets/demoImage.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -7,7 +7,6 @@ import {
   faPlay,
   faHeart,
   faBookmark,
-  faCheck,
   faCircleXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import { movieDetails } from "../sources/tmdbApi";

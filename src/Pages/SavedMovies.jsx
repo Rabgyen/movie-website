@@ -1,4 +1,3 @@
-import React from 'react'
 import { useSaveMovieContext } from '../context/SaveMovieContext' 
 import MovieCard from '../components/MovieCard'
 
