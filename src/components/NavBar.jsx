@@ -8,12 +8,10 @@ import userProfilePlaceholder from "../assets/user-profile-placeholder.png";
 const NavBar = ({onSearch}) => {
 
   const [notificationSymbol, setNotificationSymbol] = useState(true);
-  const options = ["All", "Popular", "Favorite"];
+  const options = ["All", "WatchList", "Favorite"];
   const [isOpen, setIsOpen] = useState(false);
-  const [selected, setSelected] = useState("All");
   const [input, setInput] = useState("");
 
-  const toggleDropdown = () => setIsOpen((prev) => !prev);
   const handleSelect = (option) => {
     setSelected(option);
     setIsOpen(false);
@@ -27,15 +25,6 @@ const NavBar = ({onSearch}) => {
   return (
     <div className="h-[60px] w-full flex items-center text-white px-8 mb-6">
       <div className="relative z-10 text-sm text-left">
-      <button
-        onClick={toggleDropdown}
-        className="w-26 py-2 bg-[#2b2b2b] text-white rounded-xl"
-      >
-        {selected}
-        <span>
-          <FontAwesomeIcon icon={faChevronDown} className="ml-4 text-xs"/>
-        </span>
-      </button>
 
       {isOpen && (
         <div className="absolute mt-2 w-48 bg-[#2b2b2b] rounded shadow-lg">
