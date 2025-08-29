@@ -20,7 +20,6 @@ const MovieDetails = () => {
   const [aboutMovie, setAboutMovie] = useState({});
   const [casts, setCasts] = useState([]);
   const [trailerUrl, setTrailerUrl] = useState(null);
-  const [watchLater, setWatchLater] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
   const [gotTrailer, setGotTrailer] = useState(false);
 
@@ -153,16 +152,16 @@ const MovieDetails = () => {
           </div>
         </div>
 
-        <div className="flex flex-1 min-w-[450px] small-description">
-          <div className="flex flex-col gap-8 px-4 flex-1 flex-wrap">
+        <div className="flex flex-1 min-w-[450px] border-2 small-description">
+          <div className="flex flex-col gap-8 border-2 flex-1 flex-wrap">
             <h1 className=" text-6xl font-bold">{aboutMovie.title}</h1>
 
             <div className="flex gap-4">
-              <button className="flex items-center justify-center gap-4 px-6 py-3 bg-[#33a092] text-white rounded-xl" onClick={notificationAppear} >
+              <button className="flex items-center justify-center gap-4 px-6 py-3 bg-[#33a092] text-white rounded-xl text-[14px]" onClick={notificationAppear} >
                 <FontAwesomeIcon icon={faPlay} />
                 Watch
               </button>
-              <button className="flex items-center justify-center gap-4 px-6 py-2 bg-[#33a092] text-white rounded-xl" onClick={notificationAppear}>
+              <button className="flex items-center justify-center gap-4 px-6 py-2 bg-[#33a092] text-white rounded-xl text-[14px]" onClick={notificationAppear}>
                 <FontAwesomeIcon icon={faArrowDown} />
                 Download
               </button>
@@ -197,7 +196,7 @@ const MovieDetails = () => {
           </div>
         </div>
       </div>
-      <div className={`absolute w-[500px] left-1/2 -translate-x-1/2 mt-4 flex items-center justify-center py-4 rounded-xl bg-[#2b2b2b] transition-opacity duration-500 ${showNotification ? "opacity-100" : "opacity-0 pointer-events-none"}`} onClick={notificationAppear}>
+      <div className={`fixed text-[12px] max-w[500px] text-center min-w[250px] top-0 left-1/2 -translate-x-1/2 mt-4 flex flex-1 items-center justify-center py-4 rounded-xl bg-[#2b2b2b] transition-opacity duration-500 px-4 ${showNotification ? "opacity-100" : "opacity-0 pointer-events-none"}`} onClick={notificationAppear}>
         <p>Sorry! This movie is currently unavailable.</p>
       </div>
     </div>
