@@ -152,8 +152,8 @@ const MovieDetails = () => {
           </div>
         </div>
 
-        <div className="flex flex-1 min-w-[450px] border-2 small-description">
-          <div className="flex flex-col gap-8 border-2 flex-1 flex-wrap">
+        <div className="flex flex-1 min-w-[450px] small-description">
+          <div className="flex flex-col gap-8 flex-1 flex-wrap">
             <h1 className=" text-6xl font-bold">{aboutMovie.title}</h1>
 
             <div className="flex gap-4">
