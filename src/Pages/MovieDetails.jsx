@@ -34,8 +34,6 @@ const MovieDetails = () => {
     else addToFavorites(aboutMovie)
   }
 
-  console.log(saved)
-
   const saveOnClick = () => {
     if(saved) removeFromSave(aboutMovie.id)
     else addToSave(aboutMovie)
