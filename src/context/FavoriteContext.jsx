@@ -1,42 +1,35 @@
 import { createContext, useState, useContext, useEffect } from "react";
 
-const FavoriteContext = createContext()
+const FavoriteContext = createContext();
 
-export const useFavoriteContext = () => useContext(FavoriteContext)
+export const useFavoriteContext = () => useContext(FavoriteContext);
 
-export const FavoriteMovieProvider = ({children}) => {
-    const [favoriteMovie, setFavoriteMovie] = useState([]);
+export const FavoriteMovieProvider = ({ children }) => {
+  const [favoriteMovie, setFavoriteMovie] = useState(() => {
+    const storedFavs = localStorage.getItem("favoriteMovie");
+    return storedFavs ? JSON.parse(storedFavs) : [];
+  });
 
-    useEffect(() => {
-        const storedFavs = localStorage.getItem("favoriteMovie")
+  useEffect(() => {
+    localStorage.setItem("favoriteMovie", JSON.stringify(favoriteMovie));
+  }, [favoriteMovie]);
 
-        if(storedFavs) setFavoriteMovie(JSON.parse(storedFavs))
-    },[])
+  const addToFavorites = (movie) => {
+    setFavoriteMovie((prev) => [...prev, movie]);
+  };
 
-    useEffect(() => {
-        localStorage.setItem("favoriteMovie", JSON.stringify(favoriteMovie))
-    },[favoriteMovie])
+  const removeFromFavorite = (movieId) => {
+    setFavoriteMovie((prev) => prev.filter((movie) => movie.id !== movieId));
+  };
 
-    const addToFavoites = (movie) => {
-        setFavoriteMovie(prev => [...prev, movie])
-    }
+  const isFavoriteMovie = (movieId) => favoriteMovie.some((movie) => movie.id === movieId);
 
-    const removeFromFavorite = (movieId) => {
-        setFavoriteMovie(prev => prev.filter(movie => movie.id !== movieId))
-    }
+  const value = {
+    favoriteMovie,
+    addToFavorites,
+    removeFromFavorite,
+    isFavoriteMovie,
+  };
 
-    const isFavoriteMovie = (movieId) => {
-        return favoriteMovie.some(movie => movie.id === movieId)
-    }
-
-    const value = {
-        favoriteMovie,
-        addToFavoites,
-        removeFromFavorite,
-        isFavoriteMovie
-    }
-
-    return <FavoriteContext value={value}>
-        {children}
-    </FavoriteContext>
-}
+  return <FavoriteContext.Provider value={value}>{children}</FavoriteContext.Provider>;
+};

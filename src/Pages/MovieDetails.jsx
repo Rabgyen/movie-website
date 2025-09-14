@@ -14,16 +14,16 @@ import { movieCast } from "../sources/tmdbApi";
 import { movieTrailer } from "../sources/tmdbApi";
 import { useFavoriteContext } from "../context/FavoriteContext";
 import { useSaveMovieContext } from "../context/SaveMovieContext";
+import toast from "react-hot-toast";
 
 const MovieDetails = () => {
   const { id } = useParams();
   const [aboutMovie, setAboutMovie] = useState({});
   const [casts, setCasts] = useState([]);
   const [trailerUrl, setTrailerUrl] = useState(null);
-  const [showNotification, setShowNotification] = useState(false);
   const [gotTrailer, setGotTrailer] = useState(false);
 
-  const { isFavoriteMovie, addToFavoites, removeFromFavorite} = useFavoriteContext();
+  const { isFavoriteMovie, addToFavorites, removeFromFavorite} = useFavoriteContext();
   const { addToSave, removeFromSave, isSavedMovie } = useSaveMovieContext();
 
   const favorite = isFavoriteMovie(aboutMovie.id) ;
@@ -31,7 +31,7 @@ const MovieDetails = () => {
 
   const favoriteOnClick = () => {
     if(favorite) removeFromFavorite(aboutMovie.id)
-    else addToFavoites(aboutMovie)
+    else addToFavorites(aboutMovie)
   }
 
   console.log(saved)
@@ -65,18 +65,6 @@ const MovieDetails = () => {
     };
     getTrailer();
   }, [id]);
-
-
-  const notificationAppear = () => {
-    setShowNotification(true);
-
-    setTimeout(() => {
-      setShowNotification(false);
-    },3000);
-  }
-
-  
-  
 
   if (!aboutMovie.id) {
     return (
@@ -157,11 +145,11 @@ const MovieDetails = () => {
             <h1 className=" text-6xl font-bold">{aboutMovie.title}</h1>
 
             <div className="flex gap-4">
-              <button className="flex items-center justify-center gap-4 px-6 py-3 bg-[#33a092] text-white rounded-xl text-[14px]" onClick={notificationAppear} >
+              <button className="flex items-center justify-center gap-4 px-6 py-3 bg-[#33a092] text-white rounded-xl text-[14px]" onClick={() => toast.error("Sorry! This movie is currently unavailable.")} >
                 <FontAwesomeIcon icon={faPlay} />
                 Watch
               </button>
-              <button className="flex items-center justify-center gap-4 px-6 py-2 bg-[#33a092] text-white rounded-xl text-[14px]" onClick={notificationAppear}>
+              <button className="flex items-center justify-center gap-4 px-6 py-2 bg-[#33a092] text-white rounded-xl text-[14px]" onClick={() => toast.error("Sorry! This movie is currently unavailable.")}>
                 <FontAwesomeIcon icon={faArrowDown} />
                 Download
               </button>
@@ -195,9 +183,6 @@ const MovieDetails = () => {
             </div>
           </div>
         </div>
-      </div>
-      <div className={`fixed text-[12px] max-w[500px] text-center min-w[250px] top-0 left-1/2 -translate-x-1/2 mt-4 flex flex-1 items-center justify-center py-4 rounded-xl bg-[#2b2b2b] transition-opacity duration-500 px-4 ${showNotification ? "opacity-100" : "opacity-0 pointer-events-none"}`} onClick={notificationAppear}>
-        <p>Sorry! This movie is currently unavailable.</p>
       </div>
     </div>
   );

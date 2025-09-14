@@ -7,6 +7,7 @@ import { FavoriteMovieProvider } from './context/FavoriteContext'
 import FavoritePage from './Pages/FavoritePage'
 import { SaveMovieContextProvider } from './context/SaveMovieContext'
 import SavedMovies from './Pages/SavedMovies'
+import { Toaster } from 'react-hot-toast'
 
 const Layout = () => (
   <div className='flex w-screen h-screen'>
@@ -33,6 +34,6 @@ const router = createBrowserRouter([
   }
 ]);
 
-const App = () => <SaveMovieContextProvider><FavoriteMovieProvider><RouterProvider router={router} /></FavoriteMovieProvider></SaveMovieContextProvider>
+const App = () => <SaveMovieContextProvider><FavoriteMovieProvider><RouterProvider router={router} /></FavoriteMovieProvider><Toaster position='top-center' autoClose={3000} toastOptions={{className:'text-xs'}}/></SaveMovieContextProvider>
 
 export default App;

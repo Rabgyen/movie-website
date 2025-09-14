@@ -5,14 +5,14 @@ import { useFavoriteContext } from "../context/FavoriteContext";
 
 
 const MovieCard = ({movie}) => {
-  const { isFavoriteMovie, addToFavoites, removeFromFavorite} = useFavoriteContext();
+  const { isFavoriteMovie, addToFavorites, removeFromFavorite} = useFavoriteContext();
 
   const favorite = isFavoriteMovie(movie.id) 
 
   const favoriteOnClick = (e) => {
     e.preventDefault()
     if(favorite) removeFromFavorite(movie.id)
-    else addToFavoites(movie)
+    else addToFavorites(movie)
   }
 
   return (
